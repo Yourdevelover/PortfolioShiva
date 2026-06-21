@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #faf8f3;
+    color: #26231a;
+  }
+  ::selection {
+    background-color: #1f3046;
+    color: #faf8f3;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: 'Fraunces', Georgia, serif;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Subtle film-grain overlay */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Scroll-reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll-line pulse in hero */
+@keyframes grow {
+  0%, 100% { transform: scaleY(0); opacity: 0; }
+  20%       { transform: scaleY(0); opacity: 1; }
+  80%       { transform: scaleY(1); opacity: 1; }
+}
+
+/* Smooth skill-bar entrance — driven inline by style, no extra keyframe needed */
